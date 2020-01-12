@@ -1,6 +1,40 @@
 import React, { Component } from 'react';
-import { Nav, Navbar, NavDropdown, Table, Button, ButtonGroup } from 'react-bootstrap';
-import {SERVER_URL} from './config.js'
+import {  Table, Button, ButtonGroup } from 'react-bootstrap';
+import NavBar from '../components/Navbar'
+
+class Row extends Component{
+
+    constructor(props){
+        super(props)
+        this.state = {
+            id: props.id,
+            name: props.name,
+            description: props.description,
+            price: props.price
+        }
+    }
+
+    render(){
+        const { id, name, description, price } = this.state 
+        return(
+            <tr>
+            <th>{id}</th>
+            <th>{name}</th>
+            <th>{description}</th>
+            <th>{price}</th>
+            <th>
+            <ButtonGroup className="mr-1" aria-label="First group">
+                <Button>Ver</Button>
+                <Button>Modificar</Button>
+                <Button>Eliminar</Button>
+                <Button>Detalles</Button>
+            </ButtonGroup>
+
+            </th>
+        </tr>
+        )
+    }
+}
 
 class Home extends Component{
 
@@ -9,47 +43,34 @@ class Home extends Component{
         this.state = {
             access: 'default',
             username: 'root',
-            services: null
+            services: []
         }
         this.FetchData()
-
     }
 
     FetchData(){
-        fetch(SERVER_URL+'/list')
+        fetch('http://localhost:9000/services/all')
         .then(response => response.json())         
         .then( (list)=> {
-             this.setState({ services: Object.values(list)})
+            this.setState({ services: list.services })
         })
         .catch((err)=>{ alert("no services response: "+err); });  
     }
 
-    function Row(props) {
-        render(){
-            return(
-                <tr>
-                    <th>props.id</th>
-                    <th>props.name</th>
-                    <th>props.description</th>
-                    <th>props.price</th>
-                    <th></th>
-                </tr>
-            )
-        }
-        
-    }
+   
 
     AllData(){
-        let allRowServices = this.state.services.map((service) => 
-            (
-                <Row key={service.name}
-                    id={service.id}
-                    name={service.name}
-                    description={service.description}
-                    price={service.price}
-                />
-            )
+        let allRowServices = this.state.services.map((service) =>
+
+            <Row key={service.id+service.name}
+                id={service.id}
+                name={service.name}
+                description={service.description}
+                price={service.price}
+            />
         )
+
+        return allRowServices;
     }
 
     Tabla(){
@@ -65,7 +86,7 @@ class Home extends Component{
                     </tr>
                 </thead>
                 <tbody>
-                    {this.DataTabla()}
+                    {this.AllData()}
                 </tbody>
             </Table>
         )
@@ -76,19 +97,8 @@ class Home extends Component{
         document.title = "Buffet Juridico - " + access
         return(
             <div>
-            <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="#home">Buffet juridico</Navbar.Brand>
-                <Nav className="mr-auto">
-                <NavDropdown title="Servicios" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Agregar Servicio</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Modificar Servicio</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.3">Eliminar Servicio</NavDropdown.Item>
-            </NavDropdown>
-                </Nav>              
-            </Navbar>
-            {this.Tabla()}
-
+                <NavBar/>
+                {this.Tabla()}
             </div>
         )
     }
