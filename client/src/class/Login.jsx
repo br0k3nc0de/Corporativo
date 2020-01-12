@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import "./../css/Login.css"
-import {  Form, Button, Row, Col } from 'react-bootstrap';
+import {  Form, Button, Row } from 'react-bootstrap';
 
 class Login extends Component{
 
@@ -14,7 +14,7 @@ class Login extends Component{
         .then( (user)=> {
             try{
                 JSON.parse(user)
-                document.location.href = `/manager?username=${username}&password=${password}`
+                document.location.href = '/manager'
             }catch(excep){
                 alert("El usuario/contraseña no son correctos")
             }
@@ -24,6 +24,8 @@ class Login extends Component{
     }
 
     render(){
+
+        document.title = "Corporativo Fiscal y Contable - Acesso para personal"
         return(
             <div className="container center-h center-v">    
                     
@@ -47,16 +49,9 @@ class Login extends Component{
                     </Form.Group>
 
                     <Row>
-                      <Col>
-                        <Button variant="primary" onClick={this.CheckData}>
+                        <Button block variant="primary" onClick={this.CheckData}>
                             Entrar
-                        </Button>
-                      </Col>  
-                      <Col>
-                        <Button variant="success" type="submit">
-                            Registrarme
-                        </Button>
-                      </Col>    
+                        </Button>  
                     </Row>
                     
                 </Form>

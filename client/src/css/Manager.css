@@ -1,0 +1,13 @@
+.add-btn{
+    background-color: rgb(28, 168, 39);
+    color: black;
+    font-weight: bold;
+}
+
+.upd-btn{
+    background-color: rgb(207, 157, 20);
+}
+
+.rem-btn{
+    background-color: rgb(207, 42, 20);
+}

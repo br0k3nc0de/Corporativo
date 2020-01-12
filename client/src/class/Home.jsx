@@ -158,6 +158,9 @@ class Home extends Component{
     }
 
     render(){
+
+        document.title = "Corporativo Fiscal y Contable - Home"
+
         return(
             <div >
                 <NavBar/>

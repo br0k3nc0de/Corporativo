@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import "./../css/Contact.css"
 import NavBar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { Container,Form } from "react-bootstrap";
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
+const styleMap = {
+    width: '81%',
+    height: '40%'
+}
 
 class Contact extends Component{
 
@@ -34,34 +40,37 @@ class Contact extends Component{
         )
     }
 
+    Mapa(){
+        return(
+            <Map 
+        google={this.props.google} zoom={14}
+        style={styleMap}
+        >
+            <Marker onClick={this.onMarkerClick}
+                    name={'Current location'} />
+
+            <InfoWindow onClose={this.onInfoWindowClose}>
+                {/*<div>
+                <h1>{this.state.selectedPlace.name}</h1>
+                </div>*/}
+                
+            </InfoWindow>
+        </Map>      
+        )
+    }
+
     render(){
         return(
             <div>
                 <NavBar/>
-
-                <Container>
-                    
-                        <div>
-                            <p className="main-label">Contactanos, Estamos para darte la mejor atencion.</p>
-                            {this.Formulario()}
-
-                            <div>
-                                <Map google={this.props.google} zoom={14}>
-                                    <Marker onClick={this.onMarkerClick}
-                                            name={'Current location'} />
-
-                                    <InfoWindow onClose={this.onInfoWindowClose}>
-                                        {/*<div>
-                                        <h1>{this.state.selectedPlace.name}</h1>
-                                        </div>*/}
-                                        
-                                    </InfoWindow>
-                                </Map>
-                            </div>
-                            
-                        </div>
-                        
-                        
+                <Container >  
+                    <div className="root-container">
+                        <p className="main-label">
+                            Contactanos, Estamos para darte la mejor atencion.
+                        </p>
+                        {this.Formulario()}
+                        {this.Mapa()}
+                    </div>             
                 </Container>
 
                 <Footer/>

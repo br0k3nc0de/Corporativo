@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Card, CardGroup, Container } from 'react-bootstrap';
+import {  Card, CardGroup, Container, Button } from 'react-bootstrap';
 import NavBar from '../components/Navbar'
 import Footer from '../components/Footer';
 
@@ -11,11 +11,18 @@ class CardItem extends Component{
             image: props.image,
             name: props.name,
             description: props.description,
+            created: props.created,
+            showBtn: props.showb
         }
     }
 
     render(){
-        const { image, name, description } = this.state 
+        const { image, name, description, created, showBtn } = this.state 
+
+        let styleBT = {
+            display: showBtn
+        }
+
         return(
             <Card>
                 <Card.Img variant="top" src={image} />
@@ -26,21 +33,21 @@ class CardItem extends Component{
                 </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                <small className="text-muted">Last updated 3 mins ago</small>
+                    <small className="text-muted">Ultima vez actualizado: <b>{created}</b> </small>
+                    <Button variant="success" align="right" href="/contact" style={styleBT}>Contactar</Button>
                 </Card.Footer>
             </Card>
         )
     }
 }
 
-class Services extends Component{
-
+export class CardServices extends Component{
+    
     constructor(props){
         super(props)
         this.state = {
-            access: 'default',
-            username: 'root',
-            services: []
+            services: [],
+            showb: props.showb
         }
         this.FetchData()
     }
@@ -54,8 +61,6 @@ class Services extends Component{
         .catch((err)=>{ alert("no services response: "+err); });  
     }
 
-   
-
     AllData(){
         let allRowServices = this.state.services.map((service) =>
 
@@ -63,31 +68,37 @@ class Services extends Component{
                 image={service.image}
                 name={service.name}
                 description={service.description}
+                created={service.created}
+                showBtn={this.state.showb}
             />
         )
 
         return allRowServices;
     }
 
-    Tabla(){
+    render(){
         return(
-            <CardGroup>
-                {this.AllData()}
-            </CardGroup>
+            <Container className="root-container">    
+                <CardGroup>
+                    {this.AllData()}
+                </CardGroup>
+            </Container>
         )
     }
 
-    render(){
-        const { access } = this.state
-        document.title = "Buffet Juridico - " + access
+}
+
+class Services extends Component{
+
+    render(){     
+        document.title = "Corporativo Fiscal y Contable - Nuestros Servicios" 
+        
         return(
             <div>
                 <NavBar/>
-
-                <Container className="root-container">                     
-                    {this.Tabla()}
-                </Container>
-
+            
+                <CardServices showb="show"/>
+                
                 <Footer/>
             </div>
             

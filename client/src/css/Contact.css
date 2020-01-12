@@ -1,0 +1,9 @@
+.main-label{
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.root-container{
+    background-color: aliceblue;
+    width: 80%;
+}
