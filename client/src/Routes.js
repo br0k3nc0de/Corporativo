@@ -4,6 +4,7 @@ import Login from '../src/class/Login';
 import Home from '../src/class/Home';
 import Services from '../src/class/Services';
 import Contact from "../src/class/Contact";
+import Manager from "../src/class/Manager";
 import { Switch, Route } from 'react-router-dom';
 
 const Routes = () => {
@@ -11,8 +12,9 @@ const Routes = () => {
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/services" component={Services} />
-            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/contact" component={Contact} />           
             <Route exact path="/login" component={Login} />
+            <Route path="/manager?username=" component={Manager}/>
         </Switch>
     );
 }

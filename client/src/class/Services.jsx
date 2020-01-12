@@ -11,12 +11,11 @@ class CardItem extends Component{
             image: props.image,
             name: props.name,
             description: props.description,
-            price: props.price
         }
     }
 
     render(){
-        const { image, name, description, price } = this.state 
+        const { image, name, description } = this.state 
         return(
             <Card>
                 <Card.Img variant="top" src={image} />
@@ -64,7 +63,6 @@ class Services extends Component{
                 image={service.image}
                 name={service.name}
                 description={service.description}
-                price={service.price}
             />
         )
 

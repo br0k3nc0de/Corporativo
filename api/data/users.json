@@ -1,0 +1,14 @@
+{
+    "admins": [
+        {
+            "name": "root",
+            "lastname": "manager",
+            "surname": "",
+            "fecha-nac": "25/11/2000",
+            "email": "root@localhost.com",
+            "username": "root",
+            "password": "root"
+        }
+    ]
+
+}

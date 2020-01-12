@@ -4,10 +4,6 @@ import { Nav, Navbar, Form, Button } from 'react-bootstrap';
 class NavBar extends Component{
 
     render(){
-        let Style = {
-            width: "100%"
-        }
-
         return(
           <Navbar className="navbar" bg="dark" variant="dark">
             <Navbar.Brand href="/">Corporativo Fiscal Y Contable </Navbar.Brand>
