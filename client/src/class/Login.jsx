@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 
-import "./Login.css"
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import "./../css/Login.css"
+import {  Form, Button, Row, Col } from 'react-bootstrap';
 
 class Login extends Component{
 
     render(){
         return(
-            <Container className="login-form">    
-                    <p align={'center'}>Iniciar Sesión</p>
-                <Form>                    
+            <div className="container center-h center-v">    
+                    
+                <Form className="login-form"> 
+                    <p align={'center'}><b>Iniciar Sesión</b></p>                   
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Usuario:</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control type="email" placeholder="Username" />
                         <Form.Text className="text-muted">
-                        No compartas tu usuario con nadie mas.
+                        <p className="label-share"> No compartas tu usuario con nadie mas. </p>
                         </Form.Text>
                     </Form.Group>
 
@@ -30,7 +31,7 @@ class Login extends Component{
                     <Row>
                       <Col>
                         <Button variant="primary" type="submit">
-                            Iniciar Sesión
+                            Entrar
                         </Button>
                       </Col>  
                       <Col>
@@ -41,7 +42,7 @@ class Login extends Component{
                     </Row>
                     
                 </Form>
-            </Container>
+            </div>
                 
                
           

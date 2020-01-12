@@ -11,3 +11,8 @@
     width: 30%;
     height: 80%;
 }
+
+.label-share{
+    color: red;
+    font-weight: bold;
+}
