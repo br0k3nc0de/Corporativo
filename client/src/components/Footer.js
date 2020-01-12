@@ -12,7 +12,7 @@ class Footer extends Component{
     render(){
         return(
           <div className="footer">
-            <p>{ today }</p>
+            
             <p align="center">By Powered React + Express.</p>        
              
           </div>

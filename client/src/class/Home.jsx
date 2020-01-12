@@ -159,10 +159,10 @@ class Home extends Component{
 
     render(){
         return(
-            <div>
-                <Container>
-                    <NavBar/>
-                    
+            <div >
+                <NavBar/>
+                <Container className="root-container">
+                                    
                     {this.ColumnsCards()}
 
                     {this.DeckCard()}

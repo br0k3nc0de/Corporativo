@@ -34,32 +34,31 @@ class Contact extends Component{
         )
     }
 
-    Mapa(){
-        return(
-            <Map google={this.props.google} zoom={14}>
- 
-                <Marker onClick={this.onMarkerClick}
-                        name={'Current location'} />
-        
-                <InfoWindow onClose={this.onInfoWindowClose}>
-                    {/*<div>
-                    <h1>{this.state.selectedPlace.name}</h1>
-                    </div>*/}
-                    
-                </InfoWindow>
-            </Map>
-        )
-    }
-
     render(){
         return(
             <div>
+                <NavBar/>
+
                 <Container>
-                    <NavBar/>
+                    
                         <div>
                             <p className="main-label">Contactanos, Estamos para darte la mejor atencion.</p>
                             {this.Formulario()}
-                            {this.Mapa()}
+
+                            <div>
+                                <Map google={this.props.google} zoom={14}>
+                                    <Marker onClick={this.onMarkerClick}
+                                            name={'Current location'} />
+
+                                    <InfoWindow onClose={this.onInfoWindowClose}>
+                                        {/*<div>
+                                        <h1>{this.state.selectedPlace.name}</h1>
+                                        </div>*/}
+                                        
+                                    </InfoWindow>
+                                </Map>
+                            </div>
+                            
                         </div>
                         
                         
@@ -73,5 +72,5 @@ class Contact extends Component{
 }
 
 export default GoogleApiWrapper({
-    apiKey: ("YOUR_GOOGLE_API_KEY_GOES_HERE")
+    apiKey: ("AIzaSyD8-xvcdr5jrU97iObB-2kn95La_zBsJqw")
   })(Contact)

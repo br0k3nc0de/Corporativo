@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import {  Table, Button, ButtonGroup, Container } from 'react-bootstrap';
+import {  Card, CardGroup, Container } from 'react-bootstrap';
 import NavBar from '../components/Navbar'
+import Footer from '../components/Footer';
 
-class Row extends Component{
+class CardItem extends Component{
 
     constructor(props){
         super(props)
         this.state = {
-            id: props.id,
+            image: props.image,
             name: props.name,
             description: props.description,
             price: props.price
@@ -15,23 +16,20 @@ class Row extends Component{
     }
 
     render(){
-        const { id, name, description, price } = this.state 
+        const { image, name, description, price } = this.state 
         return(
-            <tr>
-            <th>{id}</th>
-            <th>{name}</th>
-            <th>{description}</th>
-            <th>{price}</th>
-            <th>
-            <ButtonGroup className="mr-1" aria-label="First group">
-                <Button>Ver</Button>
-                <Button>Modificar</Button>
-                <Button>Eliminar</Button>
-                <Button>Detalles</Button>
-            </ButtonGroup>
-
-            </th>
-        </tr>
+            <Card>
+                <Card.Img variant="top" src={image} />
+                <Card.Body>
+                <Card.Title>{name}</Card.Title>
+                <Card.Text>
+                   {description}
+                </Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                <small className="text-muted">Last updated 3 mins ago</small>
+                </Card.Footer>
+            </Card>
         )
     }
 }
@@ -62,8 +60,8 @@ class Services extends Component{
     AllData(){
         let allRowServices = this.state.services.map((service) =>
 
-            <Row key={service.id+service.name}
-                id={service.id}
+            <CardItem key={service.name}
+                image={service.image}
                 name={service.name}
                 description={service.description}
                 price={service.price}
@@ -75,20 +73,9 @@ class Services extends Component{
 
     Tabla(){
         return(
-            <Table striped bordered hover size="sm">
-                <thead>
-                    <tr>
-                    <th>#</th>
-                    <th>Servicio</th>
-                    <th>Descripcion</th>
-                    <th>Costos</th>
-                    <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.AllData()}
-                </tbody>
-            </Table>
+            <CardGroup>
+                {this.AllData()}
+            </CardGroup>
         )
     }
 
@@ -96,12 +83,19 @@ class Services extends Component{
         const { access } = this.state
         document.title = "Buffet Juridico - " + access
         return(
-            <Container>              
-                <NavBar></NavBar>
-                {this.Tabla()}
-            </Container>
+            <div>
+                <NavBar/>
+
+                <Container className="root-container">                     
+                    {this.Tabla()}
+                </Container>
+
+                <Footer/>
+            </div>
+            
         )
     }
 
 }
+
 export default Services;

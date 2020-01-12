@@ -1,3 +1,13 @@
+
+body{
+    background-color: rgb(19, 113, 190);
+}
+
+.root-container{
+    background-color: aliceblue;
+    width: 80%;
+}
+
 .deck-card{
     background-color: #fafafa;
     margin: 1rem;
