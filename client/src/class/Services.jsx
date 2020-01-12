@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Table, Button, ButtonGroup } from 'react-bootstrap';
+import {  Table, Button, ButtonGroup, Container } from 'react-bootstrap';
 import NavBar from '../components/Navbar'
 
 class Row extends Component{
@@ -96,10 +96,10 @@ class Services extends Component{
         const { access } = this.state
         document.title = "Buffet Juridico - " + access
         return(
-            <div>
-                <NavBar/>
+            <Container>              
+                <NavBar></NavBar>
                 {this.Tabla()}
-            </div>
+            </Container>
         )
     }
 

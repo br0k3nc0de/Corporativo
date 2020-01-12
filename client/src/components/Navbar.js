@@ -6,11 +6,11 @@ class NavBar extends Component{
     render(){
         return(
           <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home">Corporativo Fiscal Y Contable </Navbar.Brand>
+          <Navbar.Brand href="/">Corporativo Fiscal Y Contable </Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Inicio</Nav.Link>
-            <Nav.Link href="#features">Servicios</Nav.Link>
-            <Nav.Link href="#pricing">Contactanos</Nav.Link>
+            <Nav.Link href="/">Inicio</Nav.Link>
+            <Nav.Link href="/services">Servicios</Nav.Link>
+            <Nav.Link href="/contact">Contactanos</Nav.Link>
           </Nav>
           <Form inline>
             <Button variant="outline-info" href="/login">Ingresar</Button>

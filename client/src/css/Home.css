@@ -1,0 +1,12 @@
+.deck-card{
+    background-color: #fafafa;
+    margin: 1rem;
+    padding: 2rem;
+    border: 2px solid #ccc;
+    justify-content: center;
+    align-items: center;
+    /* IMPORTANTE */
+    text-align: center;
+    width: 100%;
+    height: 40%;
+}
