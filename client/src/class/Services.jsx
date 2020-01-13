@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {  Card, CardGroup, Container, Button } from 'react-bootstrap';
 import NavBar from '../components/Navbar'
-import Footer from '../components/Footer';
+import Footer from '../components/Footer'
+import {SERVER_URL} from './../../src/config'
 
 
 class CardItem extends Component{
@@ -51,7 +52,7 @@ export class CardServices extends Component{
     }
 
     FetchData(){
-        fetch('http://3.18.113.46:9000/services/all')
+        fetch(`${SERVER_URL}/services/all`)
         .then(response => response.json())         
         .then( (list)=> {
             this.setState({ services: list.services })
