@@ -3,6 +3,7 @@ import {  Card, CardGroup, Container, Button } from 'react-bootstrap';
 import NavBar from '../components/Navbar'
 import Footer from '../components/Footer';
 
+
 class CardItem extends Component{
 
     constructor(props){
