@@ -8,15 +8,27 @@ class NavBar extends Component{
     constructor(props){
         super(props)
         this.state = {
+            Service: '',
             ModalAdd: false,
             ModalDel: false,
             ModalUpd: false,
+            read: true,
             Valid: true
         }
         this.imgadd = React.createRef()
         this.nameadd = React.createRef()
         this.descadd = React.createRef()
+
+        this.oldname = React.createRef()
+        this.imgupd = React.createRef()
+        this.nameupd = React.createRef()
+        this.descupd = React.createRef()
+
         this.handleAdd = this.handleAdd.bind(this)
+        this.handleCheck = this.handleCheck.bind(this)
+        this.handleUpd = this.handleUpd.bind(this)
+        this.handleDel = this.handleDel.bind(this)
+    
     }
 
     handleShow = (e,target) => {
@@ -40,7 +52,6 @@ class NavBar extends Component{
 
         }
     }
-
 
     handleClose = (e,target) => {
         switch(target){
@@ -95,6 +106,78 @@ class NavBar extends Component{
         })
     }
 
+    handleUpd () {
+        let demoService = {
+            image : this.imgupd.current.value ,
+            name : this.nameupd.current.value ,
+            description: this.descupd.current.value
+        }
+
+        let options = {
+            method: 'POST',
+            body: JSON.stringify(demoService),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }
+
+        fetch('http://localhost:9000/services/update?oldname='+this.oldname.current.value ,options)
+        .then( (response) => {
+
+            if(response.ok){
+                window.location.reload();
+                alert('Se guardo correctamente el servicio')
+            }else{
+                 alert('Hubo un problema')
+            }
+            
+        })
+    }
+
+    handleDel () {
+        let options = {
+            method: 'DELETE',
+        }
+        fetch('http://localhost:9000/services/delete?service='+this.oldname.current.value ,options)
+        .then( (response) => {
+            if(response.ok){
+                window.location.reload();
+                alert('Se eliminado correctamente el servicio')
+            }else{
+                 alert('Hubo un problema')
+            }
+            
+        })
+    }
+
+    handleCheck(){
+        let options = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }
+
+        fetch('http://localhost:9000/services/get?service='+this.oldname.current.value ,options)
+        .then( (rep) => rep.json())
+        .then( (response) => {
+            console.log(response)
+            if(response !== null){
+                this.setState({ 
+                   Service: response,
+                   read: false
+                })
+            }else{
+                 alert('Hubo un problema')
+            }
+            
+        })
+    }
+
+    /* Modal */
+
     ModalAdd(){
         return(
             <>  
@@ -135,6 +218,8 @@ class NavBar extends Component{
     }
 
     ModalUpd(){
+        let { Service, read } = this.state 
+
         return(
             <>  
                 <Modal show={this.state.ModalUpd} onHide={(e) => this.handleClose(e,'Upd')}>
@@ -143,19 +228,38 @@ class NavBar extends Component{
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
+
                     <Form.Group controlId="service-upd">
-                        <Form.Label>Nombre de Servicio</Form.Label>
-                        <Form.Control type="text" placeholder="Mantenimineto, Contabilidad, ETC" />
+                        <Form.Label>Buscar Servicio</Form.Label>
+                        <Form.Control ref={ this.oldname } type="text" placeholder="Mantenimineto, Contabilidad, ETC"
+                        readOnly={!read} />
+                        <Button onClick={this.handleCheck}>
+                            Verificar
+                        </Button>
+                    </Form.Group>
+
+                    <Form.Group controlId="service-upd">
+                        <Form.Label>Nuevo Nombre de Servicio</Form.Label>
+                        <Form.Control ref={ this.nameupd } type="text" placeholder="Mantenimineto, Contabilidad, ETC"
+                        defaultValue={Service.name}
+                        readOnly={read}
+                         />
                     </Form.Group>
 
                     <Form.Group controlId="img-upd" disabled={this.state.Valid}>
                         <Form.Label>URL Imagen:</Form.Label>
-                        <Form.Control type="text" placeholder="https://contabilidad.xyz/wp-content/uploads/2019/01/im1.jpg" />
+                        <Form.Control ref={ this.imgupd } type="text" placeholder="https://contabilidad.xyz/wp-content/uploads/2019/01/im1.jpg"
+                        defaultValue={Service.image}
+                        readOnly={read}
+                        />
                     </Form.Group>
                     
                     <Form.Group controlId="formBasicPassword" disabled={this.state.Valid}>
                         <Form.Label>Descripcion:</Form.Label>
-                        <Form.Control type="text" as="textarea" placeholder="Describe el servicio" />
+                        <Form.Control ref={ this.descupd } type="text" as="textarea" placeholder="Describe el servicio" 
+                        defaultValue={Service.description}
+                        readOnly={read}
+                        />
                     </Form.Group>
 
                 </Form>
@@ -164,7 +268,7 @@ class NavBar extends Component{
                     <Button variant="secondary" onClick={(e) => this.handleClose(e,'Upd')}>
                         Close
                     </Button>
-                    <Button variant="primary" >
+                    <Button variant="primary" onClick={this.handleUpd} >
                         Guardar
                     </Button>
                 </Modal.Footer>
@@ -174,6 +278,7 @@ class NavBar extends Component{
     }
 
     ModalRem(){
+        let { Service, read } = this.state
         return(
             <>  
                 <Modal show={this.state.ModalDel} onHide={(e) => this.handleClose(e,'Del')}>
@@ -184,18 +289,25 @@ class NavBar extends Component{
                     <Form>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Nombre de Servicio</Form.Label>
-                            <Form.Control type="text" placeholder="Mantenimineto, Contabilidad, ETC" />
+                            <Form.Control ref={ this.oldname } type="text" placeholder="Mantenimineto, Contabilidad, ETC"
+                            readOnly={!read} 
+                            />
+                            <Button onClick={this.handleCheck}>
+                                Verificar
+                            </Button>
                             <Form.Text className="text-danger" as="b" align="justify"> Esto no puedo ser revertido. VERIFICA LA INFORMACIÓN ANTES DE CONTINUAR</Form.Text>
                         </Form.Group>
 
                         <Form.Group controlId="img-del">
                             <Form.Label>URL Imagen:</Form.Label>
-                            <Form.Control type="text" placeholder="Solo Lectura" disabled/>
+                            <Form.Control type="text" placeholder="Solo Lectura" disabled
+                            defaultValue={Service.image}/>
                         </Form.Group>
                         
                         <Form.Group controlId="desc-del">
                             <Form.Label>Descripcion:</Form.Label>
-                            <Form.Control type="text" as="textarea" placeholder="Solo lectura" disabled/>
+                            <Form.Control type="text" as="textarea" placeholder="Solo lectura" disabled
+                            defaultValue={Service.description}/>
                         </Form.Group>
 
                     </Form>
@@ -204,7 +316,7 @@ class NavBar extends Component{
                     <Button variant="secondary" onClick={(e) => this.handleClose(e,'Del')}>
                     Close
                     </Button>
-                    <Button variant="danger" >
+                    <Button variant="danger" onClick={ this.handleDel} >
                         Eliminar
                     </Button>
                 </Modal.Footer>
