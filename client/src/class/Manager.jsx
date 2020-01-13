@@ -316,7 +316,7 @@ class NavBar extends Component{
                     <Button variant="secondary" onClick={(e) => this.handleClose(e,'Del')}>
                     Close
                     </Button>
-                    <Button variant="danger" onClick={ this.handleDel} >
+                    <Button variant="danger" onClick={this.handleDel} >
                         Eliminar
                     </Button>
                 </Modal.Footer>
