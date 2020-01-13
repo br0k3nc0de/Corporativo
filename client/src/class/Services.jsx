@@ -50,7 +50,7 @@ export class CardServices extends Component{
     }
 
     FetchData(){
-        fetch('http://127.0.0.1:9000/services/all')
+        fetch('http://3.18.113.46/:9000/services/all')
         .then(response => response.json())         
         .then( (list)=> {
             this.setState({ services: list.services })
