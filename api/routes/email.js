@@ -4,8 +4,8 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var router = express.Router();
 
 const From = 'contact@notreply.com'
-const To = 'aldodanielsb@gmail.com'
-const Pass = 'iyhzkgaxbirmzjrw'
+const To = 'pepepe977@gmial.com'
+const Pass = 'chimitusin19977'
 
 router.get("/", function(req, res, next) {
      res.send("API is working properly: email");
