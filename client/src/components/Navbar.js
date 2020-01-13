@@ -13,6 +13,7 @@ class NavBar extends Component{
                 <Nav.Link href="/contact">Contactanos</Nav.Link>
               </Nav>
               <Form inline>
+                <Button variant="outline-info" href="/singup">Registrate</Button>
                 <Button variant="outline-info" href="/login">Ingresar</Button>
               </Form>
         </Navbar>

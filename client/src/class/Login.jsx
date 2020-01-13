@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
 import "./../css/Login.css"
 import {  Form, Button, Row } from 'react-bootstrap';
+import {SERVER_URL} from './../../src/config'
 
 class Login extends Component{
 
@@ -9,7 +9,7 @@ class Login extends Component{
         let username = document.getElementById('user').value
         let password = document.getElementById('pass').value
 
-        fetch(`http://3.18.113.46:9000/users/login?username=${username}&password=${password}`)
+        fetch(`${SERVER_URL}/users/login?username=${username}&password=${password}`)
         .then(response => response.text())         
         .then( (user)=> {
             try{
@@ -49,8 +49,14 @@ class Login extends Component{
                     </Form.Group>
 
                     <Row>
-                        <Button block variant="primary" onClick={this.CheckData}>
+                        <Button block variant="success" onClick={this.CheckData}>
                             Entrar
+                        </Button>  
+                    </Row>
+                    <br></br>
+                    <Row>
+                        <Button block variant="primary" as="a" href="/">
+                            Regresar
                         </Button>  
                     </Row>
                     

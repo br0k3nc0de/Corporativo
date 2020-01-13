@@ -1,7 +1,9 @@
-var express = require('express');
+const fs = require('fs');
 var users = require('./../data/users')
+var express = require('express');
 var router = express.Router();
 
+var AllUsers = users.admins
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -30,5 +32,22 @@ router.get('/login', function(req, res, next) {
   }
   
 });
+
+router.post('/singup', function(req, res, next) {
+    let userdate = req.body
+
+    AllUsers.push(userdate)
+    updateFileServices()
+
+    res.send(users)
+});
+
+
+function updateFileServices(){
+  fs.writeFile('./data/users.json', JSON.stringify(users,null,5), (err) => {
+      if (err) throw err;
+      console.log('Archivo actualizado Satisfactoriamente: users.json'); 
+  });
+}
 
 module.exports = router;

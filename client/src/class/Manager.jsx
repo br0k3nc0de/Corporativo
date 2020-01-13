@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './../css/Manager.css'
 import { Nav, Navbar, Form, Button, Modal } from 'react-bootstrap';
 import { CardServices } from './Services'
+import {SERVER_URL} from './../../src/config'
 
 class NavBar extends Component{
 
@@ -93,7 +94,7 @@ class NavBar extends Component{
             }
         }
 
-        fetch('http://3.18.113.46:9000/services/add',options)
+        fetch(`${SERVER_URL}/services/add`,options)
         .then( (response) => {
 
             if(response.ok){
@@ -122,7 +123,7 @@ class NavBar extends Component{
             }
         }
 
-        fetch('http://3.18.113.46:9000/services/update?oldname='+this.oldname.current.value ,options)
+        fetch(`${SERVER_URL}/services/update?oldname=${this.oldname.current.value}` ,options)
         .then( (response) => {
 
             if(response.ok){
@@ -139,7 +140,7 @@ class NavBar extends Component{
         let options = {
             method: 'DELETE',
         }
-        fetch('http://3.18.113.46:9000/services/delete?service='+this.oldname.current.value ,options)
+        fetch(`${SERVER_URL}/services/delete?service=${this.oldname.current.value}` ,options)
         .then( (response) => {
             if(response.ok){
                 window.location.reload();
@@ -160,7 +161,7 @@ class NavBar extends Component{
             }
         }
 
-        fetch('http://3.18.113.46:9000/services/get?service='+this.oldname.current.value ,options)
+        fetch(`${SERVER_URL}/services/get?service=${this.oldname.current.value}` ,options)
         .then( (rep) => rep.json())
         .then( (response) => {
             console.log(response)

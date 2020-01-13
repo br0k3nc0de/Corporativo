@@ -1,14 +1,49 @@
 {
-    "admins": [
-        {
-            "name": "root",
-            "lastname": "manager",
-            "surname": "",
-            "fecha-nac": "25/11/2000",
-            "email": "root@localhost.com",
-            "username": "root",
-            "password": "root"
-        }
-    ]
-
+     "admins": [
+          {
+               "name": "root",
+               "lastname": "manager",
+               "surname": "",
+               "fecha-nac": "25/11/2000",
+               "email": "root@localhost.com",
+               "username": "root",
+               "password": "root"
+          },
+          {
+               "name": "root1",
+               "lastname": "manager",
+               "surname": "",
+               "fecha-nac": "25/11/2000",
+               "email": "root@localhost.com",
+               "username": "root2",
+               "password": "root"
+          },
+          {
+               "name": "dsfasdf",
+               "lastname": "safsdf",
+               "surname": "afsdfasdf",
+               "fecha-nac": "asdfasdf",
+               "email": "asdfsdfa",
+               "username": "asdfasdf",
+               "password": "asdfasd"
+          },
+          {
+               "name": "Aldo Daniel",
+               "lastname": "Sanchez",
+               "surname": "Bastida",
+               "fecha-nac": "29/12/1997",
+               "email": "aldodanielsb@gmail.com",
+               "username": "blacked",
+               "password": "aldo"
+          },
+          {
+               "name": "sdf",
+               "lastname": "",
+               "surname": "",
+               "fecha-nac": "",
+               "email": "asdasd",
+               "username": "",
+               "password": ""
+          }
+     ]
 }

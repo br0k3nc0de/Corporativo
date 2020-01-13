@@ -5,6 +5,7 @@ import Home from '../src/class/Home';
 import Services from '../src/class/Services';
 import Contact from "../src/class/Contact";
 import Manager from "../src/class/Manager";
+import Singup from "../src/class/SingUp";
 import { Switch, Route } from 'react-router-dom';
 
 const Routes = () => {
@@ -14,6 +15,7 @@ const Routes = () => {
             <Route exact path="/services" component={Services} />
             <Route exact path="/contact" component={Contact} />           
             <Route exact path="/login" component={Login} />
+            <Route exact path="/singup" component={Singup} />
             <Route exact path="/manager" component={Manager}/>
         </Switch>
     );
