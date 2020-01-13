@@ -93,7 +93,7 @@ class NavBar extends Component{
             }
         }
 
-        fetch('http://localhost:9000/services/add',options)
+        fetch('http://127.0.0.1:9000/services/add',options)
         .then( (response) => {
 
             if(response.ok){
@@ -122,7 +122,7 @@ class NavBar extends Component{
             }
         }
 
-        fetch('http://localhost:9000/services/update?oldname='+this.oldname.current.value ,options)
+        fetch('http://127.0.0.1:9000/services/update?oldname='+this.oldname.current.value ,options)
         .then( (response) => {
 
             if(response.ok){
@@ -139,7 +139,7 @@ class NavBar extends Component{
         let options = {
             method: 'DELETE',
         }
-        fetch('http://localhost:9000/services/delete?service='+this.oldname.current.value ,options)
+        fetch('http://127.0.0.1:9000/services/delete?service='+this.oldname.current.value ,options)
         .then( (response) => {
             if(response.ok){
                 window.location.reload();
@@ -160,7 +160,7 @@ class NavBar extends Component{
             }
         }
 
-        fetch('http://localhost:9000/services/get?service='+this.oldname.current.value ,options)
+        fetch('http://127.0.0.1:9000/services/get?service='+this.oldname.current.value ,options)
         .then( (rep) => rep.json())
         .then( (response) => {
             console.log(response)

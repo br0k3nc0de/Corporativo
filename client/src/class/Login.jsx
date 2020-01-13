@@ -9,7 +9,7 @@ class Login extends Component{
         let username = document.getElementById('user').value
         let password = document.getElementById('pass').value
 
-        fetch(`http://localhost:9000/users/login?username=${username}&password=${password}`)
+        fetch(`http://127.0.0.1:9000/users/login?username=${username}&password=${password}`)
         .then(response => response.text())         
         .then( (user)=> {
             try{
