@@ -28,15 +28,21 @@ router.get("/get", function(req, res, next) {
 });
 
 router.post("/add", function(req, res, next) {
-
     let service = req.body
 
-    if( !existService(service) ){
-        addService(service)
-        res.send('Se ha guardado el Servicio.')
+    console.log(service)
+
+    if( isValid(service) ){
+        if( !existService(service) ){
+            addService(service)
+            res.send('Se ha guardado el Servicio.')
+        }else{
+            res.sendStatus(403).send('Ya existe un Servicio con estos datos')
+        }
     }else{
-        res.send('Ya existe un Servicio con estos datos')
+        res.sendStatus(404).send('The service is null')
     }
+  
     
 });
 
@@ -137,6 +143,10 @@ function mes(date){
         return "0" + (date + 1)
     else
         return (date + 1)
+}
+
+function isValid(service){
+    return service.hasOwnProperty('image') && service.hasOwnProperty('name') && service.hasOwnProperty('description');
 }
 
 

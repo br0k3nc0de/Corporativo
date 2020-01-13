@@ -12,6 +12,7 @@ class CardItem extends Component{
             name: props.name,
             description: props.description,
             created: props.created,
+            updated: props.updated,
             notShow: props.hidden
         }
     }
@@ -65,6 +66,7 @@ export class CardServices extends Component{
                 name={service.name}
                 description={service.description}
                 created={service.created}
+                updated={service.updated}
                 hidden={this.state.show}
             />
         )
@@ -94,6 +96,7 @@ class Services extends Component{
                 <NavBar/>
             
                 <CardServices 
+                key={'services'}
                 hiddenBtns={false}/>
                 
                 <Footer/>

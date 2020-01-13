@@ -13,6 +13,10 @@ class NavBar extends Component{
             ModalUpd: false,
             Valid: true
         }
+        this.imgadd = React.createRef()
+        this.nameadd = React.createRef()
+        this.descadd = React.createRef()
+        this.handleAdd = this.handleAdd.bind(this)
     }
 
     handleShow = (e,target) => {
@@ -62,6 +66,35 @@ class NavBar extends Component{
         this.setState({ 's' : true })
     }
 
+    handleAdd () {
+        let demoService = {
+            image : this.imgadd.current.value ,
+            name : this.nameadd.current.value ,
+            description: this.descadd.current.value
+        }
+
+        let options = {
+            method: 'POST',
+            body: JSON.stringify(demoService),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }
+
+        fetch('http://localhost:9000/services/add',options)
+        .then( (response) => {
+
+            if(response.ok){
+                window.location.reload();
+                alert('Se guardo correctamente el servicio')
+            }else{
+                 alert('Hubo un problema')
+            }
+            
+        })
+    }
+
     ModalAdd(){
         return(
             <>  
@@ -71,28 +104,28 @@ class NavBar extends Component{
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
-                    <Form.Group controlId="service-add">
+                    <Form.Group controlId="nameadd">
                         <Form.Label>Nombre de Servicio</Form.Label>
-                        <Form.Control type="text" placeholder="Mantenimineto, Contabilidad, ETC" />
+                        <Form.Control ref={ this.nameadd } type="text" placeholder="Mantenimineto, Contabilidad, ETC" />
                     </Form.Group>
 
-                    <Form.Group controlId="img-add">
+                    <Form.Group controlId="imageadd">
                         <Form.Label>URL Imagen:</Form.Label>
-                        <Form.Control type="text" placeholder="https://contabilidad.xyz/wp-content/uploads/2019/01/im1.jpg" />
+                        <Form.Control ref={ this.imgadd } type="text" placeholder="https://contabilidad.xyz/wp-content/uploads/2019/01/im1.jpg" />
                     </Form.Group>
                     
-                    <Form.Group controlId="desc-add">
+                    <Form.Group controlId="description-add">
                         <Form.Label>Descripcion:</Form.Label>
-                        <Form.Control type="text" as="textarea" placeholder="Describe el servicio" />
+                        <Form.Control ref={ this.descadd } type="text" as="textarea" placeholder="Describe el servicio" />
                     </Form.Group>
 
                 </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={(e) => this.handleClose(e,'Add')}>
-                    Close
+                    Cerrar
                     </Button>
-                    <Button variant="primary" >
+                    <Button variant="primary" onClick={this.handleAdd}>
                         Guardar
                     </Button>
                 </Modal.Footer>
@@ -204,18 +237,16 @@ class NavBar extends Component{
     }
 }
 
-
-
 class Manager extends Component{
-
-   
 
     render(){
         document.title = 'Services Manager'
         return(
             <div>
                 <NavBar/>
-                <CardServices hiddenBtns={true} />
+                <CardServices 
+                key={'manager-services'}
+                hiddenBtns={true} />
             </div>
         )
     }
