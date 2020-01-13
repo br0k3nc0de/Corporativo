@@ -4,7 +4,7 @@ var express = require("express");
 var router = express.Router();
 
 let date = new Date()
-let today = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
+let today = date.getDate() + '/' + mes(date.getMonth()) + '/' + date.getFullYear()
 var AllServices = services.services
 
 router.get("/", function(req, res, next) {
@@ -100,7 +100,16 @@ function existService(service){
 }
 
 function addService(service){
-    AllServices.push(service)
+
+    let demoService = {
+        image: service.image,
+        name: service.name,
+        description: service.description,
+        created: today,
+        update: ''
+    }
+
+    AllServices.push(demoService)
     updateFileServices()
 }
 
@@ -116,12 +125,19 @@ function updService(oldService ,newService){
         image: newService.image,
         name: newService.name, 
         description: newService.description,
-        created: today
+        created: newService.created,
+        updated: today
     }
     addService(optService)
     updateFileServices()
 }
 
+function mes(date){
+    if( date < 10)
+        return "0" + (date + 1)
+    else
+        return (date + 1)
+}
 
 
 module.exports = router;
