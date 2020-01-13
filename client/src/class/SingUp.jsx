@@ -53,8 +53,8 @@ class Singup extends Component{
         .catch((err)=>{ alert("no services response: "+err); });
     }
 
-    handlesingup = () => {
-          
+    handlesingup = (e) => {
+          e.preventDefault()
         let userdate = {
              name : document.getElementById('name').value,
              lastname : document.getElementById('lastname').value,
@@ -65,10 +65,13 @@ class Singup extends Component{
              password : document.getElementById('password').value,
         }
 
-        if( this.validate(userdate) )
+        let pass = document.getElementById('password').value
+        let conf = document.getElementById('password-confirm').value
+
+        if( pass === conf)
             this.saveUser(userdate)
-        else
-            alert("Verifica los campos, antes de continuar.")
+        else    
+            alert("Verifica los datos")
 
         
         
@@ -83,60 +86,60 @@ class Singup extends Component{
         return(
             <div className="container center-h center-v">    
                     
-                <Form className="login-form"> 
+                <Form className="login-form" onSubmit={this.handlesingup}> 
                     <p align={'center'}><b>Registrarme</b></p>  
 
                     <Form.Group controlId="name">
-                        <Form.Label>Nombre:</Form.Label>
-                        <Form.Control type="text" defaultValue={name} 
-                        onChange={(event) => this.handleUserInput(event)}/>
+                        <Form.Label>* Nombre:</Form.Label>
+                        <Form.Control type="text" defaultValue={name} required/>
                     </Form.Group>
 
                     <Form.Group controlId="lastname">
-                        <Form.Label>Apellido Paterno:</Form.Label>
-                        <Form.Control type="text" defaultValue={lastname}
-                        onChange={(event) => this.handleUserInput(event)}/>
+                        <Form.Label>* Apellido Paterno:</Form.Label>
+                        <Form.Control type="text" defaultValue={lastname} required
+                        />
                         
                     </Form.Group>
 
                     <Form.Group controlId="surname">
                         <Form.Label>Apellido Materno:</Form.Label>
                         <Form.Control type="text" defaultValue={surname}
-                        onChange={(event) => this.handleUserInput(event)}/>
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="fecha-nac">
-                        <Form.Label>Fecha de nacimiento:</Form.Label>
-                        <Form.Control type="date" defaultValue={fechaNac}
-                        onChange={(event) => this.handleUserInput(event)}/>
+                        <Form.Label>* Fecha de nacimiento:</Form.Label>
+                        <Form.Control type="date" defaultValue={fechaNac} required
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="email">
-                        <Form.Label>Correo Electronico:</Form.Label>
-                        <Form.Control type="email" defaultValue={email}/>
-                        onChange={(event) => this.handleUserInput(event)}/>
+                        <Form.Label>* Correo Electronico:</Form.Label>
+                        <Form.Control type="email" defaultValue={email} required
+                        />
+                        
                     </Form.Group>
 
                     <Form.Group controlId="username">
-                        <Form.Label>Nombre de Usuario:</Form.Label>
-                        <Form.Control type="text" defaultValue={username}
-                        onChange={(event) => this.handleUserInput(event)}/>
+                        <Form.Label>* Nombre de Usuario:</Form.Label>
+                        <Form.Control type="text" defaultValue={username} required
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="password">
-                        <Form.Label>Constraseña:</Form.Label>
-                        <Form.Control type="password" defaultValue={password}
-                        onChange={(event) => this.handleUserInput(event)}/>
+                        <Form.Label>* Constraseña:</Form.Label>
+                        <Form.Control type="password" defaultValue={password} required
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="password-confirm">
-                        <Form.Label>Confirmar Constraseña:</Form.Label>
-                        <Form.Control type="password" defaultValue={passconf}
-                        onChange={(event) => this.handleUserInput(event)}/>
+                        <Form.Label>* Confirmar Constraseña:</Form.Label>
+                        <Form.Control type="password" defaultValue={passconf} required
+                        />
                     </Form.Group>
 
                     <Row>
-                        <Button block variant="success" onClick={this.handlesingup}>
+                        <Button block variant="success" type="submit">
                             Registrarme
                         </Button>  
                     </Row>
