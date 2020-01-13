@@ -12,16 +12,12 @@ class CardItem extends Component{
             name: props.name,
             description: props.description,
             created: props.created,
-            showBtn: props.showb
+            notShow: props.hidden
         }
     }
 
     render(){
-        const { image, name, description, created, showBtn } = this.state 
-
-        let styleBT = {
-            display: showBtn
-        }
+        const { image, name, description, created, notShow } = this.state 
 
         return(
             <Card>
@@ -34,7 +30,7 @@ class CardItem extends Component{
                 </Card.Body>
                 <Card.Footer>
                     <small className="text-muted">Ultima vez actualizado: <b>{created}</b> </small>
-                    <Button variant="success" align="right" href="/contact" style={styleBT}>Contactar</Button>
+                    <Button variant="success" align="right" href="/contact" hidden={notShow}>Contactar</Button>
                 </Card.Footer>
             </Card>
         )
@@ -47,7 +43,7 @@ export class CardServices extends Component{
         super(props)
         this.state = {
             services: [],
-            showb: props.showb
+            show: props.hiddenBtns
         }
         this.FetchData()
     }
@@ -69,7 +65,7 @@ export class CardServices extends Component{
                 name={service.name}
                 description={service.description}
                 created={service.created}
-                showBtn={this.state.showb}
+                hidden={this.state.show}
             />
         )
 
@@ -97,7 +93,8 @@ class Services extends Component{
             <div>
                 <NavBar/>
             
-                <CardServices showb="show"/>
+                <CardServices 
+                hiddenBtns={false}/>
                 
                 <Footer/>
             </div>
